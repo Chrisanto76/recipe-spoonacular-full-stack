@@ -1,6 +1,7 @@
 import * as RecipeAPI from './recipe-api';
 import express from 'express';
 import cors from 'cors';
+import 'dotenv/config';
 
 const app = express();
 
@@ -14,6 +15,12 @@ app.get('/api/recipe/search', async (req, res) => {
 	const results = await RecipeAPI.searchRecipes(searchTerm, page);
 	res.json(results);
 	//res.json({ message: 'Hello from the backdoor...' });
+});
+
+app.get('/api/recipes/:recipeId/summary', async (req, res) => {
+	const recipeId = req.params.recipeId;
+	const results = await RecipeAPI.getRecipeSummary(recipeId);
+	return res.json(results);
 });
 
 app.listen(5500, () => {
