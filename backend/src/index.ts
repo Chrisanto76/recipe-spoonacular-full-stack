@@ -16,6 +16,6 @@ app.get('/api/recipe/search', async (req, res) => {
 	//res.json({ message: 'Hello from the backdoor...' });
 });
 
-app.listen(4000, () => {
-	console.log('Server is running on port 4000');
+app.listen(5500, () => {
+	console.log('Server is running on port 5500...');
 });

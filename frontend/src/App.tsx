@@ -1,32 +1,31 @@
 import './App.css';
 import React, { useState, FormEvent } from 'react';
 import * as api from './api';
+import { Recipe } from './types';
 
 const App = () => {
 	const [searchTerm, setSearchTerm] = useState('burgers');
-	const [recipes, setRecipes] = useState([]);
+	const [recipes, setRecipes] = useState<Recipe[]>([]);
 
-	const handleSearchSubmit = async (e: FormEvent) => {
-		e.preventDefault();
-
+	const handleSearchSubmit = async (event: FormEvent) => {
+		event.preventDefault();
 		try {
 			const recipes = await api.searchRecipes(searchTerm, 1);
-			setRecipes(recipes.results);
+			setRecipes(recipes);
 		} catch (error) {
-			console.log('error');
+			console.log(error);
 		}
 	};
-
 	return (
 		<div>
-			<form onSubmit={handleSearchSubmit}>
+			<form onSubmit={(event) => handleSearchSubmit(event)}>
 				<button type="submit">Submit</button>
 			</form>
+
 			{recipes.map((recipe) => (
-				<div key={recipe.id}>
+				<div>
 					Recipe Image Location: {recipe.image}
-					<br />
-					RecipeTitle; {recipe.title}
+					Recipe Title: {recipe.title}
 				</div>
 			))}
 		</div>

@@ -2,7 +2,7 @@ const apiKey = '62acc0d853fe448d8feebed04554e032';
 
 export const searchRecipes = async (searchTerm: string, page: number) => {
 	if (!apiKey) {
-		throw new Error('API_KEY not set');
+		throw new Error('API_KEY not found');
 	}
 
 	const url = new URL('https://api.spoonacular.com/recipes/complexSearch');
