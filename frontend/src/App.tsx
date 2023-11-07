@@ -14,6 +14,7 @@ const App = () => {
 		try {
 			const recipes = await api.searchRecipes(searchTerm, 1);
 			setRecipes(recipes.results);
+			pageNumber.current = 1;
 		} catch (error) {
 			console.log(error);
 		}
@@ -24,6 +25,7 @@ const App = () => {
 		try {
 			const nextRecipes = await api.searchRecipes(searchTerm, nextPage);
 			setRecipes([...recipes, ...nextRecipes.results]);
+			pageNumber.current = nextPage;
 		} catch (error) {
 			console.log(error);
 		}
