@@ -36,8 +36,10 @@ app.post('/api/recipes/favourite', async (req, res) => {
 		});
 		return res.status(201).json(favouriteRecipe);
 	} catch (error) {
-		console.log(error);
-		return res.status(500).json({ error: 'oops, something went wrong' });
+		console.error(error);
+		return res
+			.status(500)
+			.json({ error: 'Oops, something went wrong, details: ' + error });
 	}
 });
 
@@ -51,6 +53,22 @@ app.get('/api/recipes/favourite', async (req, res) => {
 		return res.json(favourites);
 	} catch (error) {
 		console.log(error);
+	}
+});
+
+app.delete('/api/recipes/favourite', async (req, res) => {
+	const recipeId = req.body.recipeId;
+
+	try {
+		await prismaClient.favouriteRecipes.delete({
+			where: {
+				recipeId: recipeId,
+			},
+		});
+		return res.status(204).send();
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({ error: 'Oops, something went wrong' });
 	}
 });
 
