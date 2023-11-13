@@ -18,8 +18,6 @@ const App = () => {
 	const pageNumber = useRef(1);
 
 	useEffect(() => {
-		console.log('favouriteRecipes:', favouriteRecipes);
-
 		const fetchFavouriteRecipes = async () => {
 			try {
 				const favouriteRecipes = await api.getFavouriteRecipes();
@@ -30,7 +28,7 @@ const App = () => {
 		};
 
 		fetchFavouriteRecipes();
-	}, [favouriteRecipes]);
+	}, []);
 
 	const handleSearchSubmit = async (event: FormEvent) => {
 		event.preventDefault();
@@ -64,6 +62,18 @@ const App = () => {
 		}
 	};
 
+	const removeFavouriteRecipe = async (recipe: Recipe) => {
+		try {
+			await api.removeFavouriteRecipe(recipe);
+			const updatedRecipes = favouriteRecipes.filter(
+				(favRecipe) => favRecipe.id !== recipe.id
+			);
+			setFavouriteRecipes(updatedRecipes);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	return (
 		<div>
 			<div className="tabs">
@@ -92,7 +102,9 @@ const App = () => {
 							<RecipeCard
 								recipe={recipe}
 								onClick={() => setSelectedRecipe(recipe)}
-								onFavouriteButtonClick={addFavouriteRecipe}
+								onFavouriteButtonClick={
+									isFavourite ? addFavouriteRecipe : removeFavouriteRecipe
+								}
 								isFavourite={isFavourite}
 							/>
 						);
