@@ -75,10 +75,20 @@ const App = () => {
 	};
 
 	return (
-		<div>
+		<div className="app--container">
+			<div className="header">
+				<img src="/hero-image.jpg" alt="hero-img" />
+				<div className="title">My Recipe App</div>
+			</div>
 			<div className="tabs">
-				<h1 onClick={() => setSelectedTab('search')}> Recipe Search </h1>
-				<h1 onClick={() => setSelectedTab('favourites')}> Favourites </h1>
+				<h2
+					className={selectedTab === 'favourites' ? 'tab-active' : ''}
+					onClick={() => setSelectedTab('search')}
+				>
+					{' '}
+					Recipe Search{' '}
+				</h2>
+				<h2 onClick={() => setSelectedTab('favourites')}> Favourites </h2>
 			</div>
 			{selectedTab === 'search' && (
 				<>
@@ -103,7 +113,7 @@ const App = () => {
 								recipe={recipe}
 								onClick={() => setSelectedRecipe(recipe)}
 								onFavouriteButtonClick={
-									isFavourite ? addFavouriteRecipe : removeFavouriteRecipe
+									isFavourite ? removeFavouriteRecipe : addFavouriteRecipe
 								}
 								isFavourite={isFavourite}
 							/>
@@ -122,7 +132,7 @@ const App = () => {
 							<RecipeCard
 								recipe={recipe}
 								onClick={() => setSelectedRecipe(recipe)}
-								onFavouriteButtonClick={() => undefined}
+								onFavouriteButtonClick={removeFavouriteRecipe}
 								isFavourite={true}
 							/>
 						))}
