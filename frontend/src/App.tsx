@@ -47,6 +47,7 @@ const App = () => {
 			const nextRecipes = await api.searchRecipes(searchTerm, nextPage);
 			setRecipes([...recipes, ...nextRecipes.results]);
 			pageNumber.current = nextPage;
+			console.log(nextRecipes.results);
 		} catch (error) {
 			console.log(error);
 		}
@@ -80,13 +81,20 @@ const App = () => {
 						<button type="submit">Submit</button>
 					</form>
 
-					{recipes.map((recipe) => (
-						<RecipeCard
-							recipe={recipe}
-							onClick={() => setSelectedRecipe(recipe)}
-							onFavouriteButtonClick={addFavouriteRecipe}
-						/>
-					))}
+					{recipes.map((recipe) => {
+						const isFavourite = favouriteRecipes.some(
+							(favRecipe) => recipe.id === favRecipe.id
+						);
+
+						return (
+							<RecipeCard
+								recipe={recipe}
+								onClick={() => setSelectedRecipe(recipe)}
+								onFavouriteButtonClick={addFavouriteRecipe}
+								isFavourite={isFavourite}
+							/>
+						);
+					})}
 					<button className="view--more-button" onClick={handleViewMoreClick}>
 						View More
 					</button>
@@ -101,6 +109,7 @@ const App = () => {
 								recipe={recipe}
 								onClick={() => setSelectedRecipe(recipe)}
 								onFavouriteButtonClick={() => undefined}
+								isFavourite={true}
 							/>
 						))}
 					</div>
