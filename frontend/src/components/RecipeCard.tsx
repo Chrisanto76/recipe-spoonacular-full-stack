@@ -1,4 +1,5 @@
 import { Recipe } from '../types';
+import { AiOutlineHeart } from 'react-icons/ai';
 
 interface Props {
 	recipe: Recipe;
@@ -10,6 +11,9 @@ const RecipeCard = ({ recipe, onClick }: Props) => {
 		<div className="recipe--card" onClick={onClick}>
 			<img src={recipe.image} />
 			<div className="recipe--card-title">
+				<span>
+					<AiOutlineHeart size={25} />
+				</span>
 				<h2>{recipe.title}</h2>
 			</div>
 		</div>
