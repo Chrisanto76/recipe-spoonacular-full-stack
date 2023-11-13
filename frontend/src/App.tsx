@@ -18,6 +18,8 @@ const App = () => {
 	const pageNumber = useRef(1);
 
 	useEffect(() => {
+		console.log('favouriteRecipes:', favouriteRecipes);
+
 		const fetchFavouriteRecipes = async () => {
 			try {
 				const favouriteRecipes = await api.getFavouriteRecipes();
@@ -28,7 +30,7 @@ const App = () => {
 		};
 
 		fetchFavouriteRecipes();
-	}, []);
+	}, [favouriteRecipes]);
 
 	const handleSearchSubmit = async (event: FormEvent) => {
 		event.preventDefault();
