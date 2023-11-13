@@ -53,12 +53,10 @@ export const addFavouriteRecipe = async (recipe: Recipe) => {
 	if (!response.ok) {
 		throw new Error(`HTTP error! Status: ${response.status}`);
 	}
-
-	return response.json();
 };
 
 export const removeFavouriteRecipe = async (recipe: Recipe) => {
-	const url = new URL(`http://localhost:5500/api/recipes/favourite`);
+	const url = new URL('http://localhost:5500/api/recipes/favourite');
 	const body = {
 		recipeId: recipe.id,
 	};
@@ -74,6 +72,4 @@ export const removeFavouriteRecipe = async (recipe: Recipe) => {
 	if (!response.ok) {
 		throw new Error(`HTTP error! Status: ${response.status}`);
 	}
-
-	return response.json();
 };
