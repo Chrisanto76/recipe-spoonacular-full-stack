@@ -35,9 +35,7 @@ export const getFavouriteRecipes = async () => {
 };
 
 export const addFavouriteRecipe = async (recipe: Recipe) => {
-	const url = new URL(
-		`http://localhost:5500/api/recipes/favourite/${recipe.id}`
-	);
+	const url = new URL(`http://localhost:5500/api/recipes/favourite`);
 	const body = {
 		recipeId: recipe.id,
 	};
