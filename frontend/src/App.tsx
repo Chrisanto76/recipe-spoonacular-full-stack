@@ -100,7 +100,7 @@ const App = () => {
 				<>
 					<form onSubmit={(event) => handleSearchSubmit(event)}>
 						<input
-							type="text"
+							className="search--bar"
 							required
 							placeholder="Search for a recipe"
 							value={searchTerm}
